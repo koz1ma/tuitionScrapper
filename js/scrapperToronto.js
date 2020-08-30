@@ -36,6 +36,8 @@ const scrapeCentennial = async () => {
     'accept-language': 'en-US,en;q=0.8'
   });
 
+  await page.setDefaultNavigationTimeout(6000);
+
   await page.goto(
     'https://www.centennialcollege.ca/admissions/tuition-and-fees/tuition-information/', { waitUntil: 'networkidle0' }
   )
@@ -102,6 +104,8 @@ const scrapeFanshawec = async () => {
     'accept-language': 'en-US,en;q=0.8'
   });
 
+  await page.setDefaultNavigationTimeout(6000);
+
   await page.goto(
     'https://www.fanshawec.ca/paying-college/tuition-fees/tuition-fees', { waitUntil: 'networkidle0' }
   )
@@ -134,6 +138,8 @@ const scrapeYork = async () => {
   await page.setExtraHTTPHeaders({
     'accept-language': 'en-US,en;q=0.8'
   });
+
+  await page.setDefaultNavigationTimeout(6000);
 
   await page.goto(
     'https://futurestudents.yorku.ca/tuition', { waitUntil: 'networkidle0' }

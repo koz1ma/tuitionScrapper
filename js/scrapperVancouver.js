@@ -37,6 +37,8 @@ const scrapeCapilano = async () => {
     'accept-language': 'en-US,en;q=0.8'
   });
 
+  await page.setDefaultNavigationTimeout(6000);
+
   await page.goto(
     'https://www.capilanou.ca/admissions/fees--finances/tuition--fees/tuition--fee-estimator/', { waitUntil: 'networkidle0' }
   )
@@ -104,6 +106,7 @@ const scrapeDouglas = async () => {
   await page.setExtraHTTPHeaders({
     'accept-language': 'en-US,en;q=0.8'
   });
+  await page.setDefaultNavigationTimeout(6000);
 
   await page.goto(
     'https://www.douglascollege.ca/international-students/prospective-students/tuition-and-fees', { waitUntil: 'networkidle0' }
@@ -138,6 +141,8 @@ const scrapeUBC = async () => {
   await page.setExtraHTTPHeaders({
     'accept-language': 'en-US,en;q=0.8'
   });
+
+  await page.setDefaultNavigationTimeout(6000);
 
   await page.goto(
     'https://students.ubc.ca/enrolment/finances/tuition-fees/undergraduate-tuition-fees ', { waitUntil: 'networkidle0' }
