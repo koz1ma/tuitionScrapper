@@ -1,7 +1,6 @@
 //tuitions are always 1 year based
 
 /* JSON STRUCTURE
-Name is always in the format: university - course
 university - general is the default value in case it's applied for all courses
 {
   "cities": [
@@ -10,6 +9,7 @@ university - general is the default value in case it's applied for all courses
       "values": [
         {
           "name": "XXX",
+          "course": "XXX",
           "amount": 000000.00
         },
       ]
@@ -24,8 +24,7 @@ university - general is the default value in case it's applied for all courses
 const puppeteer = require('puppeteer')
 
 const scrapeCentennial = async () => {
-  //const browser = await puppeteer.launch()
-  const browser = await puppeteer.launch({args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
 
   const page = await browser.newPage()
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);
@@ -36,11 +35,11 @@ const scrapeCentennial = async () => {
   });
 
   await page.goto(
-    'https://www.centennialcollege.ca/admissions/tuition-and-fees/tuition-information/', {waitUntil: 'networkidle0'}
+    'https://www.centennialcollege.ca/admissions/tuition-and-fees/tuition-information/', { waitUntil: 'networkidle0' }
   )
-  page.on("console", msg => console.log("PAGE LOG:", msg)); 
+  page.on("console", msg => console.log("PAGE LOG:", msg));
 
-  const scrapedData = await page.evaluate(() =>{
+  const scrapedData = await page.evaluate(() => {
     const result = []
     result.push(
       {
@@ -90,7 +89,7 @@ const scrapeCentennial = async () => {
 }
 
 const scrapeFanshawec = async () => {
-  const browser = await puppeteer.launch({args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
 
   const page = await browser.newPage()
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);
@@ -101,17 +100,17 @@ const scrapeFanshawec = async () => {
   });
 
   await page.goto(
-    'https://www.fanshawec.ca/paying-college/tuition-fees/tuition-fees', {waitUntil: 'networkidle0'}
+    'https://www.fanshawec.ca/paying-college/tuition-fees/tuition-fees', { waitUntil: 'networkidle0' }
   )
-  page.on("console", msg => console.log("PAGE LOG:", msg)); 
+  page.on("console", msg => console.log("PAGE LOG:", msg));
 
-  const scrapedData = await page.evaluate(() =>{
+  const scrapedData = await page.evaluate(() => {
     const result = []
     result.push(
       {
         name: "Fanshawe College",
         course: "International Students - general",
-        amount: '$'+document.querySelector('.layout > .layout__region > .block > .clearfix > .highlight-box:nth-child(9)').textContent.split('$')[1].split(' ')[0]
+        amount: '$' + document.querySelector('.layout > .layout__region > .block > .clearfix > .highlight-box:nth-child(9)').textContent.split('$')[1].split(' ')[0]
       }
     )
 
@@ -123,7 +122,7 @@ const scrapeFanshawec = async () => {
 }
 
 const scrapeYork = async () => {
-  const browser = await puppeteer.launch({args: ['--no-sandbox'] });
+  const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
 
   const page = await browser.newPage()
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);
@@ -134,14 +133,14 @@ const scrapeYork = async () => {
   });
 
   await page.goto(
-    'https://futurestudents.yorku.ca/tuition', {waitUntil: 'networkidle0'}
+    'https://futurestudents.yorku.ca/tuition', { waitUntil: 'networkidle0' }
   )
-  page.on("console", msg => console.log("PAGE LOG:", msg)); 
+  page.on("console", msg => console.log("PAGE LOG:", msg));
 
-  const scrapedData = await page.evaluate(() =>{
+  const scrapedData = await page.evaluate(() => {
     const result = []
     const uniValues = document.querySelector('div > table > tbody > tr:nth-child(1) > td:nth-child(3)').textContent.split('\n')
-    uniValues.forEach(function(entry) {
+    uniValues.forEach(function (entry) {
       let splitContent = entry.split(' - ')
       result.push(
         {
