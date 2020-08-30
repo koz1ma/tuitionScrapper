@@ -1,1 +1,1 @@
-web: node /js/routes.js
+web: node ./js/routes.js
