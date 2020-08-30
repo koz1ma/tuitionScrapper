@@ -21,7 +21,7 @@ const puppeteer = require('puppeteer')
 
 const scrapeCapilano = async () => {
   //const browser = await puppeteer.launch()
-  const browser = await puppeteer.launch({defaultViewport: null });
+  const browser = await puppeteer.launch({args: ['--no-sandbox']});
   const scrapedData = []
 
   const page = await browser.newPage()
@@ -91,7 +91,7 @@ const scrapeCapilano = async () => {
 }
 
 const scrapeDouglas = async () => {
-  const browser = await puppeteer.launch({defaultViewport: null });
+  const browser = await puppeteer.launch({args: ['--no-sandbox'] });
 
   const page = await browser.newPage()
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);
@@ -125,7 +125,7 @@ const scrapeDouglas = async () => {
 }
 
 const scrapeUBC = async () => {
-  const browser = await puppeteer.launch({defaultViewport: null });
+  const browser = await puppeteer.launch({args: ['--no-sandbox'] });
 
   const page = await browser.newPage()
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);

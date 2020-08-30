@@ -25,7 +25,7 @@ const puppeteer = require('puppeteer')
 
 const scrapeCentennial = async () => {
   //const browser = await puppeteer.launch()
-  const browser = await puppeteer.launch({defaultViewport: null });
+  const browser = await puppeteer.launch({args: ['--no-sandbox'] });
 
   const page = await browser.newPage()
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);
@@ -90,7 +90,7 @@ const scrapeCentennial = async () => {
 }
 
 const scrapeFanshawec = async () => {
-  const browser = await puppeteer.launch({defaultViewport: null });
+  const browser = await puppeteer.launch({args: ['--no-sandbox'] });
 
   const page = await browser.newPage()
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);
@@ -123,7 +123,7 @@ const scrapeFanshawec = async () => {
 }
 
 const scrapeYork = async () => {
-  const browser = await puppeteer.launch({defaultViewport: null });
+  const browser = await puppeteer.launch({args: ['--no-sandbox'] });
 
   const page = await browser.newPage()
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);
