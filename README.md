@@ -4,6 +4,7 @@ tuitionScrapper using puppeteer and nodejs for Toronto and Vancouver based Unive
 All tuitions are for international students.
 
 List of universities:
+
 https://www.capilanou.ca/admissions/fees--finances/tuition--fees/tuition--fee-estimator/ 
 https://www.douglascollege.ca/international-students/prospective-students/tuition-and-fees 
 https://students.ubc.ca/enrolment/finances/tuition-fees/undergraduate-tuition-fees 
