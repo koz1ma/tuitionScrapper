@@ -4,6 +4,8 @@ const scraperVancouver = require('./scrapperVancouver')
 var app = express()
 const port = 3000
 
+//route to get international tuitions
+
 app.get('/tuitions', function (req, res, next) {
   //Toronto Universities 
 
@@ -80,7 +82,7 @@ app.get('/tuitions', function (req, res, next) {
         console.log(err.stack)
       })
   })
-
+  //resolve all promises to get data
   Promise.all([scrapeCentennial, scrapeFanshawec, scrapeYork, scrapeCapilano, scrapeDouglas, scrapeUBC])
     .then(data => {
       res.send({ cities: { Toronto: data[0].concat(data[1]).concat(data[2]), Vancouver: data[3].concat(data[4]).concat(data[5]) } })

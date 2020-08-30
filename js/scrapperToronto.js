@@ -17,17 +17,19 @@ university - general is the default value in case it's applied for all courses
   ]
 } */
 
-//https://www.centennialcollege.ca/admissions/tuition-and-fees/tuition-information/ OK
+//https://www.centennialcollege.ca/admissions/tuition-and-fees/tuition-information/
 //https://www.fanshawec.ca/paying-college/tuition-fees/tuition-fees
 //https://futurestudents.yorku.ca/tuition
 
 const puppeteer = require('puppeteer')
 
 const scrapeCentennial = async () => {
+  //parameter to make it work on heroku VM
   const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
 
   const page = await browser.newPage()
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);
+  //header to make headless mode works exactly as regular browser
   const chromeUserAgent = headlessUserAgent.replace('HeadlessChrome', 'Chrome');
   await page.setUserAgent(chromeUserAgent);
   await page.setExtraHTTPHeaders({
@@ -37,6 +39,7 @@ const scrapeCentennial = async () => {
   await page.goto(
     'https://www.centennialcollege.ca/admissions/tuition-and-fees/tuition-information/', { waitUntil: 'networkidle0' }
   )
+  //settings for debugging
   page.on("console", msg => console.log("PAGE LOG:", msg));
 
   const scrapedData = await page.evaluate(() => {

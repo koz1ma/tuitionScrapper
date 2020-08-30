@@ -24,10 +24,12 @@ university - general is the default value in case it's applied for all courses
 const puppeteer = require('puppeteer')
 
 const scrapeCapilano = async () => {
+  //parameter to make it work on heroku VM
   const browser = await puppeteer.launch({ args: ['--no-sandbox','--disable-setuid-sandbox'] });
   const scrapedData = []
 
   const page = await browser.newPage()
+  //header to make headless mode works exactly as regular browser
   const headlessUserAgent = await page.evaluate(() => navigator.userAgent);
   const chromeUserAgent = headlessUserAgent.replace('HeadlessChrome', 'Chrome');
   await page.setUserAgent(chromeUserAgent);
@@ -38,6 +40,7 @@ const scrapeCapilano = async () => {
   await page.goto(
     'https://www.capilanou.ca/admissions/fees--finances/tuition--fees/tuition--fee-estimator/', { waitUntil: 'networkidle0' }
   )
+  //settings for debugging
   page.on("console", msg => console.log("PAGE LOG:", msg));
 
   const courseList = await page.evaluate(() => {
