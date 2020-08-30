@@ -89,6 +89,10 @@ app.get('/tuitions', function (req, res, next) {
     })
     .catch(err => res.status(500).send(err))
 })
+//for debugging
+app.get('/', function (req, res) {
+  res.send('App is running')
+})
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)
